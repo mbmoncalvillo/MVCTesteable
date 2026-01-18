@@ -10,6 +10,8 @@ import vista.Vista;
 
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 class TestControlador {
 
     @Test
@@ -47,4 +49,23 @@ class TestControlador {
 
         verify(vista).mostrarError("El nombre no puede estar vacío");
        }
+    @Test
+    void listarUsuarios_controlador() {
+      
+        Vista vista = mock(Vista.class);
+        Servicio servicio = mock(Servicio.class);
+
+       
+        when(servicio.obtenerUsuarios()).thenReturn(List.of());
+
+       
+        Controlador controlador = new Controlador(vista, servicio);
+
+        
+        controlador.listarUsuarios();
+
+       
+        verify(vista).mostrarUsuarios(any(List.class));
+    }
+
 }
